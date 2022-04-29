@@ -13,25 +13,6 @@ import Home from './components/Home/Home';
 
 
 function App() {
-  const [heatMapData, setHeatMapData] = useState({})
-  const [mapKey, setMapKey] = useState(0)
-  const [heatMapDay] = useState(getDay())
-  const [heatMapTime, setHeatMapTime] = useState(getTime())
-
-  useEffect(() => {
-
-    const getDefault = async () => {
-      console.log(heatMapTime)
-      const res = await axios.get(`https://wifivedata.ishankumar11.repl.co/${heatMapDay}/${heatMapTime}`)
-      console.log(res.data)
-
-      setHeatMapData(res.data);
-    }
-    getDefault();
-
-
-  }, [])
-
 
   function getDay() {
 
@@ -88,6 +69,29 @@ function App() {
     }
 
   }
+
+
+  const [heatMapData, setHeatMapData] = useState({})
+  const [mapKey, setMapKey] = useState(0)
+  const [heatMapDay] = useState(getDay())
+  const [heatMapTime, setHeatMapTime] = useState(getTime())
+
+  useEffect(() => {
+
+    const getDefault = async () => {
+      console.log(heatMapTime)
+      const res = await axios.get(`https://wifivedata.ishankumar11.repl.co/${heatMapDay}/${heatMapTime}`)
+      console.log(res.data)
+
+      setHeatMapData(res.data);
+    }
+    getDefault();
+
+
+  }, [])
+
+
+
 
 
 
