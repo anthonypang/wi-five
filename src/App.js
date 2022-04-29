@@ -76,15 +76,17 @@ function App() {
   const [heatMapDay] = useState(getDay())
   const [heatMapTime, setHeatMapTime] = useState(getTime())
 
+  const getDefault = async () => {
+    console.log(heatMapTime)
+    const res = await axios.get(`https://wifivedata.ishankumar11.repl.co/${heatMapDay}/${heatMapTime}`)
+    console.log(res.data)
+
+    setHeatMapData(res.data);
+  }
+
   useEffect(() => {
 
-    const getDefault = async () => {
-      console.log(heatMapTime)
-      const res = await axios.get(`https://wifivedata.ishankumar11.repl.co/${heatMapDay}/${heatMapTime}`)
-      console.log(res.data)
 
-      setHeatMapData(res.data);
-    }
     getDefault();
 
 
