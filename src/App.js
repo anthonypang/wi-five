@@ -73,19 +73,22 @@ function App() {
 
   const [heatMapData, setHeatMapData] = useState({})
   const [mapKey, setMapKey] = useState(0)
-  const [heatMapDay] = useState(getDay())
+  const [heatMapDay, setHeatMapDay] = useState(getDay())
   const [heatMapTime, setHeatMapTime] = useState(getTime())
+  const [heatMapTraffic, setHeatMapTraffic] = useState('low')
 
-  const getDefault = async () => {
-    console.log(heatMapTime)
-    const res = await axios.get(`https://wifivedata.ishankumar11.repl.co/${heatMapDay}/${heatMapTime}`)
-    console.log(res.data)
 
-    setHeatMapData(res.data);
-  }
 
   useEffect(() => {
+    const getDefault = async () => {
 
+      console.log(heatMapTime)
+
+      const res = await axios.get(`https://wifivedata.ishankumar11.repl.co/${heatMapDay}/${heatMapTime}/${heatMapTraffic}`)
+      console.log(res.data)
+
+      setHeatMapData(res.data);
+    }
 
     getDefault();
 
@@ -99,7 +102,7 @@ function App() {
 
 
   async function sliderChange() {
-    const res = await axios.get(`https://wifivedata.ishankumar11.repl.co/${heatMapDay}/${heatMapTime}`)
+    const res = await axios.get(`https://wifivedata.ishankumar11.repl.co/${heatMapDay}/${heatMapTime}/${heatMapTraffic}`)
     console.log(res.data)
     setHeatMapData(res.data);
     setMapKey(Math.random())
@@ -111,7 +114,7 @@ function App() {
       <Routes>
 
         <Route exact path='/' element={<Home />} />
-        <Route exact path='/Map' element={<Map mapKey={mapKey} setHeatMapTime={setHeatMapTime} setHeatMapData={setHeatMapData} heatMapTime={heatMapTime} setMapKey={setMapKey} sliderChange={sliderChange} heatMapData={heatMapData} />} />
+        <Route exact path='/Map' element={<Map mapKey={mapKey} heatMapDay={heatMapDay} setHeatMapDay={setHeatMapDay} heatMapTime={heatMapTime} heatMapTraffic={heatMapTraffic} setHeatMapData={setHeatMapData} setHeatMapTime={setHeatMapTime} setHeatMapTraffic={setHeatMapTraffic} setMapKey={setMapKey} sliderChange={sliderChange} heatMapData={heatMapData} />} />
 
       </Routes>
 
